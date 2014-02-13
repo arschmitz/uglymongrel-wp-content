@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # set the hostname of the vm so puppet site.pp will react
   # with the right node config
   # config.vm.provision :shell, :inline => "hostname vagrant.jquery.com"
-  # config.vm.hostname "vagrant.jquery.com"
+  config.vm.hostname = "vagrant.jquery.com"
 
   config.vm.provider "virtualbox" do |v|
     # make sure that the name makes sense when seen in the vbox GUI
@@ -27,15 +27,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Be nice to our users.
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
   end
-
-
-  # if we were doing a fresh install, this would be up to date
-  # config.vm.provision :shell, :inline => "apt-get update"
-
-  # config.vm.provision :puppet do |puppet|
-  #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "site.pp"
-  #   puppet.module_path    = "modules"
-  #   puppet.facter         = { :vagrant => "true" }
-  # end
 end
