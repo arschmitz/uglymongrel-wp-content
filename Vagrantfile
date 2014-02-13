@@ -6,7 +6,7 @@ Vagrant.require_version ">= 1.4.0"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # use the config key as the vm identifier
-  config.vm.box = "jquery-contribute-base"
+  config.vm.box = "jquery-contribute"
 
   config.vm.box_url = "https://www.dropbox.com/s/zigf78280cjoz43/jquery-contribute-base.box?dl=1"
 
