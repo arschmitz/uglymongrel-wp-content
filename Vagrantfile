@@ -6,9 +6,11 @@ Vagrant.require_version ">= 1.4.0"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # use the config key as the vm identifier
-  config.vm.box = "jquery-contribute"
+  config.vm.box = "jquery-wp-content"
+  config.vm.box_download_checksum_type = "sha256"
+  config.vm.box_download_checksum = "3182bc50668e86022e7d50bc8c096774b49de40cfaffc77f4fad75ca6cf83d3d"
 
-  config.vm.box_url = "https://www.dropbox.com/s/kgduj7dn8axxc2u/jquery-contribute.box?dl=1"
+  config.vm.box_url = "http://boxes.jquery.com/jquery-wp-content.box"
 
   config.vm.synced_folder "./", "/var/www/wordpress/jquery-wp-content"
 
