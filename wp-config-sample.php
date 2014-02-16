@@ -63,6 +63,9 @@ $table_prefix  = 'wp_';
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
+define( 'WP_CONTENT_DIR', dirname( ABSPATH ) . '/jquery-wp-content' );
+define( 'UPLOADS', dirname( ABSPATH ) . '/wordpress/uploads' );
+
 /** jQuery.com configuration file */
 require( dirname( __FILE__ ) . '/jquery-wp-content/config.php' );
 

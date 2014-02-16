@@ -82,6 +82,6 @@ add_filter( 'body_class', function( $classes ) {
 
 add_filter( 'option_uploads_use_yearmonth_folders', '__return_false' );
 add_filter( 'upload_dir', function( $upload_dir ) {
-	$upload_dir['path'] = $upload_dir['basedir'] = WP_CONTENT_DIR . '/uploads';
+	$upload_dir['path'] = $upload_dir['basedir'] = UPLOADS;
 	return $upload_dir;
 });
