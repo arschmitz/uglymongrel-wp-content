@@ -1,17 +1,17 @@
 <?php
 /*
- * The base configuration of the WordPress jQuery.com setup.
+ * The base configuration of the WordPress uglymongrel.com setup.
  */
 
 /*
- * jQuery.com settings
+ * uglymongrel.com settings
  */
 
-define( 'JQUERY_STAGING', true );
-define( 'JQUERY_STAGING_PREFIX', 'local.' );
+define( 'UGLYMONGREL_STAGING', true );
+define( 'UGLYMONGREL_STAGING_PREFIX', 'local.' );
 
 // WordPress debugging mode (enables PHP E_NOTICE and WordPress notices)
-define( 'WP_DEBUG', (bool) JQUERY_STAGING );
+define( 'WP_DEBUG', (bool) UGLYMONGREL_STAGING );
 
 /*
  * Database Settings
@@ -63,11 +63,11 @@ $table_prefix  = 'wp_';
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
-define( 'WP_CONTENT_DIR', dirname( ABSPATH ) . '/jquery-wp-content' );
+define( 'WP_CONTENT_DIR', dirname( ABSPATH ) . '/uglymongrel-wp-content' );
 define( 'UPLOADS', dirname( ABSPATH ) . '/wordpress/uploads' );
 
-/** jQuery.com configuration file */
-require( dirname( __FILE__ ) . '/jquery-wp-content/config.php' );
+/** uglymongrel.com configuration file */
+require( dirname( __FILE__ ) . '/uglymongrel-wp-content/config.php' );
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');

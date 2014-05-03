@@ -8,13 +8,13 @@ if ( 1 != $blog_id && false !== strpos( $_SERVER['PHP_SELF'], 'wp-admin/install.
 }
 
 if ( ! isset( $_POST['weblog_title'] ) )
-	$_POST['weblog_title'] = 'jQuery';
+	$_POST['weblog_title'] = 'uglymongrel';
 
 function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated = '', $user_password = '' ) {
 	global $wpdb;
 
 	$base = '/';
-	$domain = JQUERY_STAGING_PREFIX . 'jquery.com';
+	$domain = UGLYMONGREL_STAGING_PREFIX . 'uglymongrel.com';
 
 	wp_check_mysql_version();
 	wp_cache_flush();
@@ -32,7 +32,7 @@ function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated 
 		$wpdb->$table = $prefixed_table;
 
 	install_network();
-	populate_network( 1, $domain, $user_email, 'jQuery Network', $base, false );
+	populate_network( 1, $domain, $user_email, 'uglymongrel Network', $base, false );
 
 	update_site_option( 'site_admins', array( $user->user_login ) );
 	update_site_option( 'allowedthemes', array() );
@@ -47,8 +47,8 @@ function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated 
 	}
 	update_option( 'fileupload_url', get_option( 'siteurl' ) . '/' . $upload_path );
 
-	foreach ( jquery_sites() as $site => $details )
-		jquery_install_site( $site, $user );
+	foreach ( uglymongrel_sites() as $site => $details )
+		uglymongrel_install_site( $site, $user );
 
 	wp_new_blog_notification( $blog_title, $guess_url, $user_id, $message = __( 'The password you chose during the install.' ) );
 	wp_cache_flush();
@@ -56,8 +56,8 @@ function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated 
 	return array( 'url' => $guess_url, 'user_id' => $user_id, 'password' => $user_password, 'password_message' => $message );
 }
 
-function jquery_install_site( $site, $user ) {
-	$sites = jquery_sites();
+function uglymongrel_install_site( $site, $user ) {
+	$sites = uglymongrel_sites();
 	$details = $sites[ $site ];
 
 	if ( strpos( $site, '/' ) ) {
@@ -68,11 +68,11 @@ function jquery_install_site( $site, $user ) {
 		$path = '/';
 	}
 
-	$default_options = jquery_default_site_options();
+	$default_options = uglymongrel_default_site_options();
 	$default_options['admin_email'] = $user->user_email;
 
 	if ( 1 !== $details['blog_id'] ) {
-		$blog_id = insert_blog( JQUERY_STAGING_PREFIX . $domain, $path, 1 );
+		$blog_id = insert_blog( UGLYMONGREL_STAGING_PREFIX . $domain, $path, 1 );
 		if ( $blog_id != $details['blog_id'] )
 			wp_die( "Something went very wrong when trying to install $domain as site $blog_id-{$details['blog_id']}. Find nacin." );
 

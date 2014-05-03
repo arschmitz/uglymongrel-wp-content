@@ -7,10 +7,10 @@
  * that already start with a version number-like string, in case
  * API sub-sites link to each other.
  */
-if ( false === strpos( JQUERY_LIVE_SITE, '/' ) )
+if ( false === strpos( UGLYMONGREL_LIVE_SITE, '/' ) )
 	return;
 
-list( , $subsite ) = explode( '/', JQUERY_LIVE_SITE, 2 );
+list( , $subsite ) = explode( '/', UGLYMONGREL_LIVE_SITE, 2 );
 
 $callback = function( $content ) use ( $subsite ) {
 	$content = preg_replace( '~(href|src)=(["\'])/(?!\d+\.\d+/)~', '$1=$2/' . $subsite . '/', $content );

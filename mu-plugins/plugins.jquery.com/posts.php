@@ -1,20 +1,20 @@
 <?php
 /**
- * Plugin Name: Post Type - jQuery Plugin
+ * Plugin Name: Post Type - uglymongrel Plugin
  */
 
 // Prevent default redirects
-// https://github.com/jquery/plugins.jquery.com/issues/108
+// https://github.com/a/plugins.jquery.com/issues/108
 add_filter( 'redirect_canonical', function ( $redirect_url ) {
 	return is_404() ? false : $redirect_url;
 });
 
-// Create custom post type: jquery_plugin
-function post_type_jquery_plugin_init() {
-	register_post_type( 'jquery_plugin', array(
+// Create custom post type: uglymongrel_plugin
+function post_type_uglymongrel_plugin_init() {
+	register_post_type( 'uglymongrel_plugin', array(
 		'labels' => array(
-			'name' => __( 'jQuery Plugins' ),
-			'singular_name' => __( 'jQuery Plugin' )
+			'name' => __( 'uglymongrel Plugins' ),
+			'singular_name' => __( 'uglymongrel Plugin' )
 		),
 		'public' => true,
 		'map_meta_cap' => true,
@@ -26,9 +26,9 @@ function post_type_jquery_plugin_init() {
 	) );
 }
 
-// Rewrite jquery_plugin posts to be at the root
+// Rewrite uglymongrel_plugin posts to be at the root
 add_filter( 'post_type_link', function( $post_link, $post ) {
-	if ( 'jquery_plugin' === $post->post_type ) {
+	if ( 'uglymongrel_plugin' === $post->post_type ) {
 		return user_trailingslashit( home_url( get_page_uri( $post ) ) );
 	}
 	return $post_link;
@@ -43,10 +43,10 @@ add_filter( 'page_rewrite_rules', function( $rules ) {
 	return $rules;
 } );
 
-// Only search against parent jquery_plugin posts
-function jquery_plugin_posts_only_for_searches( $query ) {
+// Only search against parent uglymongrel_plugin posts
+function uglymongrel_plugin_posts_only_for_searches( $query ) {
 	if ( $query->is_main_query() && ($query->is_search() || $query->is_tag()) ) {
-		$query->set( 'post_type', 'jquery_plugin' );
+		$query->set( 'post_type', 'uglymongrel_plugin' );
 		$query->set( 'post_parent', 0 );
 		$query->set( 'meta_key', 'watchers' );
 		$query->set( 'orderby', 'meta_value_num' );
@@ -54,8 +54,8 @@ function jquery_plugin_posts_only_for_searches( $query ) {
 	}
 }
 
-add_action( 'init', 'post_type_jquery_plugin_init' );
-add_action( 'pre_get_posts', 'jquery_plugin_posts_only_for_searches' );
+add_action( 'init', 'post_type_uglymongrel_plugin_init' );
+add_action( 'pre_get_posts', 'uglymongrel_plugin_posts_only_for_searches' );
 add_filter( 'pre_option_permalink_structure', function() {
 	return '/%postname%';
 } );
@@ -68,20 +68,20 @@ add_filter( 'pre_option_permalink_structure', function() {
  * let's just continue to hijack it.
  */
 add_action( 'init', function() {
-	$GLOBALS['wp_taxonomies']['post_tag']->update_count_callback = 'jquery_update_plugin_tag_count';
+	$GLOBALS['wp_taxonomies']['post_tag']->update_count_callback = 'uglymongrel_update_plugin_tag_count';
 } );
 
 /**
  * Mostly just _update_post_term_count(), tweaked for
- * post_type = 'jquery_plugin' and post_parent = 0.
+ * post_type = 'uglymongrel_plugin' and post_parent = 0.
  */
-function jquery_update_plugin_tag_count( $terms, $taxonomy ) {
+function uglymongrel_update_plugin_tag_count( $terms, $taxonomy ) {
 	global $wpdb;
 	foreach ( (array) $terms as $term ) {
 		$count = (int) $wpdb->get_var( $wpdb->prepare(
 			"SELECT COUNT(*) FROM $wpdb->term_relationships, $wpdb->posts " .
 			"WHERE $wpdb->posts.ID = $wpdb->term_relationships.object_id " .
-				"AND post_status = 'publish' AND post_type = 'jquery_plugin' " .
+				"AND post_status = 'publish' AND post_type = 'uglymongrel_plugin' " .
 				"AND post_parent = 0 AND term_taxonomy_id = %d",
 			$term ) );
 		do_action( 'edit_term_taxonomy', $term, $taxonomy );

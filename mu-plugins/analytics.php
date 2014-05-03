@@ -1,6 +1,6 @@
 <?php
 
-JQUERY_STAGING || add_action( 'wp_footer', function() { ?>
+UGLYMONGREL_STAGING || add_action( 'wp_footer', function() { ?>
 <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-1076265-1']);
